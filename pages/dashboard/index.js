@@ -1,5 +1,5 @@
 // @mui
-import { Grid, Container, Stack } from '@mui/material';
+import { Grid, Container, Stack, Typography, Divider } from '@mui/material';
 import { styled } from '@mui/material/styles';
 // components
 import Page from '../../components/Page';
@@ -9,6 +9,7 @@ import {
     BankingCurrentBalance,
     BankingBalanceStatistics,
     BankingExpensesCategories,
+    BankingLoanWheel
 } from '../../components/bank';
 import { News } from '../../components/news';
 
@@ -24,9 +25,6 @@ export const getStaticProps = async () => {
     const res = await fetch("https://mqqniutdba.execute-api.us-east-1.amazonaws.com/default/getMyNewsApiKey");
     const data = await res.json();
     const id = data.body.clientId.newsApiKey;
-
-    // const newsRes = fetch(`https://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=${ id }`);
-    // const newsData = (await newsRes).json()
     return {
         props: {
             newsKey: id
@@ -38,22 +36,29 @@ export default function Dashboard({ newsKey }) {
     return (
         <RootStyle title="General: Banking">
             <Container maxWidth={'lg'}>
-                <Grid container spacing={3} >
+
+                <Grid container spacing={3} sx={{ mt: 2, mb: 2 }}>
+                    <Grid item xs={12}>
+                        <Typography variant='h2'>
+                            Welcome John!
+                        </Typography>
+                        <Divider />
+                    </Grid>
                     <Grid item xs={12} md={7}>
                         <Stack direction={{ xs: 'column', sm: 'row' }} spacing={3}>
                             <BankingWidgetSummary
                                 title="Income"
-                                icon={'eva:diagonal-arrow-left-down-fill'}
+                                icon={'eva:diagonal-arrow-right-up-fill'}
                                 percent={2.6}
-                                total={18765}
+                                total={6729}
                                 chartData={[111, 136, 76, 108, 74, 54, 57, 84]}
                             />
                             <BankingWidgetSummary
                                 title="Expenses"
                                 color="warning"
-                                icon={'eva:diagonal-arrow-right-up-fill'}
+                                icon={'eva:diagonal-arrow-right-down-fill'}
                                 percent={-0.5}
-                                total={8938}
+                                total={2930}
                                 chartData={[111, 136, 76, 108, 74, 54, 57, 84]}
                             />
                         </Stack>
@@ -66,8 +71,13 @@ export default function Dashboard({ newsKey }) {
                     <Grid item xs={12} md={12}>
                         <Stack spacing={3}>
                             <BankingBalanceStatistics />
-                            <BankingExpensesCategories />
                         </Stack>
+                    </Grid>
+                    <Grid item xs={12} md={8}>
+                        <BankingExpensesCategories />
+                    </Grid>
+                    <Grid item xs={12} md={4}>
+                        <BankingLoanWheel />
                     </Grid>
                     <Grid item xs={12} md={12}>
                         <News apiKey={newsKey} />

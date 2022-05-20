@@ -7,3 +7,7 @@ export function formatCurrency(number) {
 export function formatPercent(number) {
     return numeral(number / 100).format('0.0%');
 }
+
+export function formatNumber(number) {
+    return numeral(number).format();
+}

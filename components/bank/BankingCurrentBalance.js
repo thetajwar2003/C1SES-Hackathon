@@ -138,8 +138,7 @@ function CardItem({ card }) {
             disabledEffect
             visibleByDefault
             alt="credit-card"
-            src={`https://minimal-assets-api.vercel.app/assets/icons/ic_${ cardType === 'mastercard' ? 'mastercard' : 'visa'
-              }.svg`}
+            src={`https://minimal-assets-api.vercel.app/assets/icons/ic_${ cardType }.svg`}
             style={{ height: 24 }}
           />
           <Typography sx={{ typography: 'subtitle1', textAlign: 'right' }}>{cardNumber}</Typography>
