@@ -1,10 +1,84 @@
 import Head from 'next/head';
 import Image from 'next/image';
+import { useState, useEffect, useCallback } from "react";
+import { usePlaidLink } from "react-plaid-link";
 import styles from '../styles/Home.module.css';
 
 export default function Home() {
+  const [token, setToken] = useState(null);
+  const [data, setData] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+
+  const onSuccess = useCallback(async (publicToken) => {
+    setLoading(true);
+    await fetch("/api/plaid/exchange_public_token", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ public_token: publicToken }),
+    });
+    await getBalance();
+  }, []);
+
+
+  // Creates a Link token
+  const createLinkToken = useCallback(async () => {
+    // For OAuth, use previously generated Link token
+    if (typeof window !== 'undefined') {
+      if (window.location.href.includes("?oauth_state_id=")) {
+        // const linkToken = localStorage.getItem('link_token');
+        setToken(linkToken);
+      } else {
+        const response = await fetch("/api/plaid/create_link_token", {});
+        const data = await response.json();
+        setToken(data.link_token);
+        // localStorage.setItem("link_token", data.link_token);
+        console.log("TOKEN: ", data.link_token);
+      }
+    }
+
+  }, [setToken]);
+
+  // Fetch balance data
+  const getBalance = useCallback(async () => {
+    setLoading(true);
+    const response = await fetch("/api/plaid/balance", {});
+    const data = await response.json();
+    setData(data);
+    setLoading(false);
+  }, [setData, setLoading]);
+
+  let isOauth = false;
+
+  const config = {
+    token,
+    onSuccess,
+  };
+
+  // For OAuth, configure the received redirect URI
+  if (typeof window !== 'undefined') {
+    if (window.location.href.includes("?oauth_state_id=")) {
+      config.receivedRedirectUri = window.location.href;
+      isOauth = true;
+    }
+  }
+
+  const { open, ready } = usePlaidLink(config);
+
+  useEffect(() => {
+    if (token == null) {
+      createLinkToken();
+    }
+    if (isOauth && ready) {
+      open();
+    }
+  }, [token, isOauth, ready, open]);
+
   return (
     <div className={styles.container}>
+
       <h1 className="text-6xl font-bold underline">
         Hello world!
       </h1>
@@ -23,6 +97,10 @@ export default function Home() {
           Get started by editing{' '}
           <code className={styles.code}>pages/index.js</code>
         </p>
+        <button onClick={() => open()
+        } disabled={!ready}>
+          <strong>Link account</strong>
+        </button>
 
         <div className={styles.grid}>
           <a href="https://nextjs.org/docs" className={styles.card}>
