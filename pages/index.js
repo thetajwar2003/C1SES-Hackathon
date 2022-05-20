@@ -93,38 +93,44 @@ export default function Home() {
   return (
     < RootStyle title="General: Banking" >
       <Container maxWidth={'lg'}>
-        <Stack>
-          {/* <Navbar /> */}
+        {/* <Navbar /> */}
 
-          <Grid container spacing={3}>
-            <Grid item xs={12} md={6} lg={7} sx={{ pr: { md: 7 } }}>
-              <img src={"https://ecm.capitalone.com/WCM/bank/landing-pages/online-banking/online-banking-e4-checkered/06710-lpmigration-onlinebanking-mech-e4.g-desktop/rmobile.png"} />
-            </Grid>
-
-            <Grid item xs={12} md={6} lg={5}>
-
-              <Typography variant="h2" sx={{ mb: 3 }}>
-                Banking is hard
-              </Typography>
-
-              <Typography sx={{ color: 'text.secondary', mb: 3 }}>
-                We strive to help college students have an easy entrance to banking. There's so many terminologies and concepts that can be very confusing
-                to grasp. Our state of the art platform gets rid of all the unnecessary jargon and only show what's important for college students. Get started
-                today by clicking the button below!
-              </Typography>
-
-              <Button
-                variant="outlined"
-                color="inherit"
-                size="large"
-                onClick={() => open()}
-                disabled={!ready}
-              >
-                Connect Your Accounts!
-              </Button>
-            </Grid>
+        <Grid container spacing={3} sx={{ mt: 3 }}>
+          <Grid item xs={12} md={6} lg={7} sx={{ pr: { md: 7 } }}>
+            <img src={"https://ecm.capitalone.com/WCM/bank/landing-pages/online-banking/online-banking-e4-checkered/06710-lpmigration-onlinebanking-mech-e4.g-desktop/rmobile.png"} />
           </Grid>
-        </Stack>
+
+          <Grid item xs={12} md={6} lg={5}>
+
+            <Typography variant="h2" sx={{ mb: 3 }}>
+              Banking is hard
+            </Typography>
+
+            <Typography sx={{ color: 'text.secondary', mb: 3 }}>
+              We strive to help college students have an easy entrance to banking. There's so many terminologies and concepts that can be very confusing
+              to grasp. Our state of the art platform gets rid of all the unnecessary jargon and only show what's important for college students. Get started
+              today by clicking the button below!
+            </Typography>
+
+            <Button
+              variant="outlined"
+              color="inherit"
+              size="large"
+              onClick={() => open()}
+              disabled={!ready}
+            >
+              Connect Your Accounts!
+            </Button>
+          </Grid>
+          <Grid item md={5}>
+            <Typography variant='h2' align='center'>
+              Let Us Help You Get The Headstart You Need!
+            </Typography>
+          </Grid>
+          <Grid item md={7}>
+            <img src="https://images.moneycontrol.com/static-mcnews/2022/02/digital-banking_pic-1.jpg?impolicy=website&width=770&height=431" style={{ borderRadius: 10 }} />
+          </Grid>
+        </Grid>
       </Container>
     </RootStyle>
 
