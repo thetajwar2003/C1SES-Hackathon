@@ -11,7 +11,7 @@ import { formatCurrency } from '../../utils/format';
 // _mock_
 import { cards } from '../../utils/data';
 // components
-import CarouselDots from '../CarouselDots';
+import { CarouselDots } from '../carousel';
 import CustomIcon from '../CustomIcon';
 
 

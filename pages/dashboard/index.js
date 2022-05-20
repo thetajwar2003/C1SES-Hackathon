@@ -10,6 +10,7 @@ import {
     BankingBalanceStatistics,
     BankingExpensesCategories,
 } from '../../components/bank';
+import { News } from '../../components/news';
 
 
 // ----------------------------------------------------------------------
@@ -23,6 +24,9 @@ export const getStaticProps = async () => {
     const res = await fetch("https://mqqniutdba.execute-api.us-east-1.amazonaws.com/default/getMyNewsApiKey");
     const data = await res.json();
     const id = data.body.clientId.newsApiKey;
+
+    // const newsRes = fetch(`https://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=${ id }`);
+    // const newsData = (await newsRes).json()
     return {
         props: {
             newsKey: id
@@ -31,7 +35,6 @@ export const getStaticProps = async () => {
 };
 
 export default function Dashboard({ newsKey }) {
-    console.log(newsKey);
     return (
         <RootStyle title="General: Banking">
             <Container maxWidth={'lg'}>
@@ -67,7 +70,7 @@ export default function Dashboard({ newsKey }) {
                         </Stack>
                     </Grid>
                     <Grid item xs={12} md={12}>
-
+                        <News apiKey={newsKey} />
                     </Grid>
                 </Grid>
             </Container>
