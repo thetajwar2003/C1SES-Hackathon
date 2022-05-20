@@ -26,17 +26,13 @@ const RootStyle = styled(Card)(({ theme }) => ({
 
 const CHART_DATA = {
   labels: [
-    'Category 1',
-    'Category 2',
-    'Category 3',
-    'Category 4',
-    'Category 5',
-    'Category 6',
-    'Category 7',
-    'Category 8',
-    'Category 9',
+    'Tuition',
+    'Bills & Utilities',
+    'Shopping',
+    'Food & Drink',
+    'Travel',
   ],
-  data: [14, 23, 21, 17, 15, 10, 12, 17, 21],
+  data: [53, 24, 20, 32, 28],
 };
 
 export default function BankingExpensesCategories() {
@@ -99,14 +95,14 @@ export default function BankingExpensesCategories() {
           <Typography sx={{ mb: 1, typography: 'body2', color: 'text.secondary' }}>
             Categories
           </Typography>
-          <Typography sx={{ typography: 'h4' }}>9</Typography>
+          <Typography sx={{ typography: 'h4' }}>5</Typography>
         </Box>
 
         <Box sx={{ py: 2, width: 1, textAlign: 'center' }}>
           <Typography sx={{ mb: 1, typography: 'body2', color: 'text.secondary' }}>
-            Categories
+            Total Expenses
           </Typography>
-          <Typography sx={{ typography: 'h4' }}>$18,765</Typography>
+          <Typography sx={{ typography: 'h4' }}>$2,930</Typography>
         </Box>
       </Stack>
     </RootStyle>

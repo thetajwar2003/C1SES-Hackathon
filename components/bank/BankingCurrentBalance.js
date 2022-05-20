@@ -1,3 +1,5 @@
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 import PropTypes from 'prop-types';
 import { useState } from 'react';
 import Slider from 'react-slick';
@@ -9,8 +11,7 @@ import { formatCurrency } from '../../utils/format';
 // _mock_
 import { cards } from '../../utils/data';
 // components
-import Icon from '@iconify/react';
-import CarouselDots from '../CarouselDots';
+import { CarouselDots } from '../carousel';
 import CustomIcon from '../CustomIcon';
 
 
@@ -33,7 +34,7 @@ const CardItemStyle = styled('div')(({ theme }) => ({
   padding: theme.spacing(3),
   backgroundRepeat: 'no-repeat',
   color: theme.palette.common.white,
-  backgroundImage: 'url("https://minimal-assets-api.vercel.app/assets/bg_card.png")',
+  backgroundImage: 'url("https://picsum.photos/id/1075/300/200?blur=2")',
   display: 'flex',
   flexDirection: 'column',
   justifyContent: 'space-between',
@@ -73,6 +74,7 @@ export default function BankingCurrentBalance() {
         <Slider {...settings}>
           {cards.map((card) => (
             <CardItem key={card.id} card={card} />
+            // <p>hi</p>
           ))}
         </Slider>
       </Box>
@@ -136,8 +138,7 @@ function CardItem({ card }) {
             disabledEffect
             visibleByDefault
             alt="credit-card"
-            src={`https://minimal-assets-api.vercel.app/assets/icons/ic_${ cardType === 'mastercard' ? 'mastercard' : 'visa'
-              }.svg`}
+            src={`https://minimal-assets-api.vercel.app/assets/icons/ic_${ cardType }.svg`}
             style={{ height: 24 }}
           />
           <Typography sx={{ typography: 'subtitle1', textAlign: 'right' }}>{cardNumber}</Typography>
